@@ -1,23 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-
-type Category = {
-  id: string;
-  name: string;
-  emoji: string;
-  gradient: string;
-  description: string;
-};
-
-const CATEGORIES: Category[] = [
-  { id: "fast-food", name: "Đồ ăn nhanh", emoji: "🍔", gradient: "from-yellow-300 to-orange-500", description: "Nhanh, ngon, giá rẻ" },
-  { id: "snacks", name: "Đồ ăn vặt", emoji: "🍟", gradient: "from-pink-300 to-rose-500", description: "Giòn, dễ ăn, đa dạng" },
-  { id: "rice", name: "Cơm lười", emoji: "🍚", gradient: "from-emerald-300 to-green-600", description: "Đủ chất, no lâu" },
-  { id: "soup", name: "Súp nóng", emoji: "🥣", gradient: "from-cyan-300 to-blue-600", description: "Ấm áp, bổ dưỡng" },
-  { id: "dessert", name: "Tráng miệng", emoji: "🍰", gradient: "from-violet-300 to-pink-500", description: "Ngọt, thơm, hấp dẫn" },
-  { id: "drinks", name: "Đồ uống", emoji: "🧋", gradient: "from-indigo-300 to-purple-600", description: "Mát, tươi, năng lượng" },
-];
+import Link from "next/link";
+import { CATEGORIES } from "@/lib/data";
 
 export default function FoodSlider() {
   const [index, setIndex] = useState(0);
@@ -60,27 +45,8 @@ export default function FoodSlider() {
     const cat = CATEGORIES[catIdx];
     const isCenter = position === "center";
 
-    return (
-      <div
-        key={`${cat.id}-${position}`}
-        className={`
-          absolute transition-all duration-500 ease-out
-          rounded-3xl overflow-hidden cursor-pointer
-          flex flex-col items-center justify-center text-center text-white
-          bg-gradient-to-br ${cat.gradient}
-          ${isCenter 
-            ? "w-64 h-80 z-20 scale-100 opacity-100 shadow-2xl" 
-            : "w-48 h-64 z-10 scale-75 opacity-60 shadow-lg hover:scale-80 hover:opacity-75"
-          }
-          ${position === "left" ? "-left-48 sm:-left-32" : position === "right" ? "-right-48 sm:-right-32" : "left-1/2 -translate-x-1/2"}
-        `}
-        onClick={() => {
-          if (position === "left") go(-1);
-          else if (position === "right") go(1);
-        }}
-        onMouseEnter={stopAutoplay}
-        onMouseLeave={startAutoplay}
-      >
+    const cardContent = (
+      <>
         {/* Decorative background elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white blur-3xl" />
@@ -95,8 +61,56 @@ export default function FoodSlider() {
             <p className="text-sm font-medium opacity-90 max-w-xs">{cat.description}</p>
           )}
         </div>
-      </div>
+      </>
     );
+
+    const cardClass = `
+      absolute transition-all duration-500 ease-out
+      rounded-3xl overflow-hidden cursor-pointer
+      flex flex-col items-center justify-center text-center text-white
+      bg-gradient-to-br ${cat.gradient}
+      ${
+        isCenter
+          ? "w-64 h-80 z-20 scale-100 opacity-100 shadow-2xl"
+          : "w-48 h-64 z-10 scale-75 opacity-60 shadow-lg hover:scale-80 hover:opacity-75"
+      }
+      ${
+        position === "left"
+          ? "-left-48 sm:-left-32"
+          : position === "right"
+          ? "-right-48 sm:-right-32"
+          : "left-1/2 -translate-x-1/2"
+      }
+    `;
+
+    if (isCenter) {
+      return (
+        <Link
+          key={`${cat.id}-${position}`}
+          href={`/phan-loai/${cat.id}`}
+          className={cardClass}
+          onMouseEnter={stopAutoplay}
+          onMouseLeave={startAutoplay}
+        >
+          {cardContent}
+        </Link>
+      );
+    } else {
+      return (
+        <div
+          key={`${cat.id}-${position}`}
+          className={cardClass}
+          onClick={() => {
+            if (position === "left") go(-1);
+            else if (position === "right") go(1);
+          }}
+          onMouseEnter={stopAutoplay}
+          onMouseLeave={startAutoplay}
+        >
+          {cardContent}
+        </div>
+      );
+    }
   };
 
   return (
@@ -105,10 +119,11 @@ export default function FoodSlider() {
         {/* Header */}
         <div className="w-full flex items-center justify-between px-4 sm:px-0">
           <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
-            Theme
+            Danh sách phân loại
           </h2>
           <span className="text-lg font-semibold text-zinc-500 dark:text-zinc-400">
-            {String(index + 1).padStart(2, "0")}/{String(CATEGORIES.length).padStart(2, "0")}
+            {String(index + 1).padStart(2, "0")}/
+            {String(CATEGORIES.length).padStart(2, "0")}
           </span>
         </div>
 
