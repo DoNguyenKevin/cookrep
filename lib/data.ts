@@ -226,6 +226,59 @@ export const FOODS_BY_CATEGORY: Record<string, Food[]> = {
   cookTime: "20 phút",
   difficulty: "Dễ"
 },
+{
+  id: "beef-taco",
+  name: "Taco bò",
+  emoji: "🌮",
+  description: "Vỏ bánh giòn kẹp nhân bò kiểu Mexico, ăn vui miệng",
+  ingredients: [
+    "4 vỏ taco giòn",
+    "200g thịt bò xay",
+    "1 muỗng canh dầu ăn",
+    "1 muỗng cà phê muối",
+    "1 muỗng cà phê paprika",
+    "1/2 củ hành tây băm",
+    "Xà lách cắt nhỏ",
+    "Phô mai bào",
+    "Sốt salsa hoặc tương cà"
+  ],
+  instructions: [
+    "Xào hành tây đến khi thơm",
+    "Thêm bò xay vào xào chín",
+    "Nêm muối, tiêu, paprika",
+    "Nhét thịt bò vào vỏ bánh taco",
+    "Thêm xà lách, phô mai và sốt",
+    "Ăn liền khi vỏ còn giòn"
+  ],
+  cookTime: "15 phút",
+  difficulty: "Dễ"
+},
+{
+  id: "chicken-burrito",
+  name: "Burrito gà",
+  emoji: "🌯",
+  description: "Bánh cuộn kiểu Mexico với gà, rau và cơm, ăn rất chắc bụng",
+  ingredients: [
+    "2 bánh tortilla lớn",
+    "200g ức gà thái nhỏ",
+    "1 chén cơm",
+    "Xà lách cắt nhỏ",
+    "1/2 quả bơ cắt lát",
+    "2 muỗng sốt mayonnaise hoặc yogurt",
+    "Paprika, muối, tiêu"
+  ],
+  instructions: [
+    "Xào gà với muối, tiêu, paprika",
+    "Trải tortilla ra bàn",
+    "Cho cơm, gà, xà lách, bơ và sốt vào",
+    "Cuộn chặt tay",
+    "Áp chảo nhẹ cho vỏ bánh ấm và thơm",
+  ],
+  cookTime: "10 phút",
+  difficulty: "Rất dễ"
+},
+
+
 
 
   ],
